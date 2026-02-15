@@ -70,6 +70,10 @@ header {
     margin-left: 10px;
 }
 
+.icon:hover {
+    opacity: 0.7;
+}
+
 img {
    display: block; 
 }
