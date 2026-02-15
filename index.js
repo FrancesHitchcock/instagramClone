@@ -15,7 +15,7 @@ const posts = [
         location: "Ornans, France",
         avatar: "images/avatar-courbet.jpg",
         post: "images/post-courbet.jpg",
-        alt: "",
+        alt: "Self-portrait of Gustave Courbet with wide staring eyes, running his hands through his hair.",
         comment: "i'm feelin a bit stressed tbh",
         likes: 4
     },
@@ -25,7 +25,7 @@ const posts = [
         location: "Paris, France",
         avatar: "images/avatar-ducreux.jpg",
         post: "images/post-ducreux.jpg",
-        alt: "",
+        alt: "Self-portrait of Joseph Ducreux wearing both a smile and a frown, pointing at the viewer. ",
         comment: "gm friends! which coin are YOU stacking up today?? post below and WAGMI!",
         likes: 152
     }
@@ -33,59 +33,38 @@ const posts = [
 
 const main = document.getElementById("main");
 
-let innerHtml = ``;
+// let innerHtml = ``;
 
-const post = posts[0];
-
-innerHtml += `
-    <section class="user-profile">
-        <div class="user-info">
-            <img class="avatar" src="${post.avatar}" alt="${post.name} avatar">
-            <div class="user-name-wrapper">
-                <h2 class="name">${post.name}</h2>
-                <p class="location">${post.location}</p>
-            </div>
-        </div>
-        <img class="user-img" src="${post.post}" alt="${post.alt}">
-        <div class="profile-section">
-            <div class="icon-container">
-                <img data-postindex="0" class="icon" src="images/icon-heart.png" alt="likes icon.">
-                <img class="icon" src="images/icon-comment.png" alt="comment icon.">
-                <img class="icon" src="images/icon-dm.png" alt="direct message icon.">
-            </div>
-            <p class="like-count"><span class="bold-text">${post.likes} likes</span></p>
-            <p class="username-caption"><span class="bold-text">${post.username}</span> ${post.comment}</p>
-        </div>
-    </section>
-`
 
 function render() {
 
     let innerHtml = ``;
 
-    const post = posts[0];
+    for (let i = 0; i < posts.length; i++) {
+        const post = posts[i];
 
-    innerHtml += `
-        <section class="user-profile">
-            <div class="user-info">
-                <img class="avatar" src="${post.avatar}" alt="${post.name} avatar">
-                <div class="user-name-wrapper">
-                    <h2 class="name">${post.name}</h2>
-                    <p class="location">${post.location}</p>
+        innerHtml += `
+            <section class="user-profile">
+                <div class="user-info">
+                    <img class="avatar" src="${post.avatar}" alt="${post.name} avatar">
+                    <div class="user-name-wrapper">
+                        <h2 class="name">${post.name}</h2>
+                        <p class="location">${post.location}</p>
+                    </div>
                 </div>
-            </div>
-            <img class="user-img" src="${post.post}" alt="${post.alt}">
-            <div class="profile-section">
-                <div class="icon-container">
-                    <img data-postindex="0" class="icon" src="images/icon-heart.png" alt="likes icon.">
-                    <img class="icon" src="images/icon-comment.png" alt="comment icon.">
-                    <img class="icon" src="images/icon-dm.png" alt="direct message icon.">
+                <img class="user-img" src="${post.post}" alt="${post.alt}">
+                <div class="profile-section">
+                    <div class="icon-container">
+                        <img data-postindex="${i}" class="icon" src="images/icon-heart.png" alt="likes icon.">
+                        <img class="icon" src="images/icon-comment.png" alt="comment icon.">
+                        <img class="icon" src="images/icon-dm.png" alt="direct message icon.">
+                    </div>
+                    <p class="like-count"><span class="bold-text">${post.likes} likes</span></p>
+                    <p class="username-caption"><span class="bold-text">${post.username}</span> ${post.comment}</p>
                 </div>
-                <p class="like-count"><span class="bold-text">${post.likes} likes</span></p>
-                <p class="username-caption"><span class="bold-text">${post.username}</span> ${post.comment}</p>
-            </div>
-        </section>
-    `
+            </section>
+        `
+    }
     
     main.innerHTML = innerHtml;
 }
@@ -93,7 +72,6 @@ function render() {
 
 document.addEventListener("click", (e) => {
     if (e.target.dataset.postindex) {
-
         const index = Number(e.target.dataset.postindex);
         
         posts[index].likes += 1;
