@@ -33,9 +33,6 @@ const posts = [
 
 const main = document.getElementById("main");
 
-// let innerHtml = ``;
-
-
 function render() {
 
     let innerHtml = ``;
@@ -68,7 +65,6 @@ function render() {
     
     main.innerHTML = innerHtml;
 }
-
 
 document.addEventListener("click", (e) => {
     if (e.target.dataset.postindex) {
