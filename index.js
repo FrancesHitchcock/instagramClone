@@ -74,6 +74,11 @@ function renderLikes(e) {
     targetElement.textContent = `${posts[index].likes} likes`
 }
 
-document.addEventListener("dblclick", renderLikes)
-
 renderMain();
+
+const likesElems = document.querySelectorAll('[data-postindex]');
+
+likesElems.forEach(elem => {
+    elem.addEventListener("dblclick", renderLikes);
+})
+
