@@ -33,8 +33,7 @@ const posts = [
 
 const main = document.getElementById("main");
 
-function render() {
-
+function renderMain() {
     let innerHtml = ``;
 
     for (let i = 0; i < posts.length; i++) {
@@ -56,7 +55,7 @@ function render() {
                         <img class="icon" src="images/icon-comment.png" alt="comment icon.">
                         <img class="icon" src="images/icon-dm.png" alt="direct message icon.">
                     </div>
-                    <p class="like-count"><span class="bold-text">${post.likes} likes</span></p>
+                    <p class="like-count"><span class="bold-text" data-likesindex="${i}">${post.likes} likes</span></p>
                     <p class="username-caption"><span class="bold-text">${post.username}</span> ${post.comment}</p>
                 </div>
             </section>
@@ -66,13 +65,15 @@ function render() {
     main.innerHTML = innerHtml;
 }
 
-document.addEventListener("click", (e) => {
-    if (e.target.dataset.postindex) {
-        const index = Number(e.target.dataset.postindex);
-        
-        posts[index].likes += 1;
-        render();
-    }    
-})
+function renderLikes(e) {
+    const index = Number(e.target.dataset.postindex);
+    posts[index].likes += 1;
 
-render();
+    const targetElement = document.querySelector(`[data-likesindex="${index}"]`);
+    
+    targetElement.textContent = `${posts[index].likes} likes`
+}
+
+document.addEventListener("dblclick", renderLikes)
+
+renderMain();
