@@ -12,7 +12,7 @@ Goals of the project were as follows:
 Stretch goals were as follows:
 
 - Use JavaScript to render out all three posts
-- Increase the likes when clicking the posts
+- Increase the likes when double-clicking the posts
 
 Frances Hitchcock
 16 February 2026
