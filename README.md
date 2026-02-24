@@ -16,3 +16,6 @@ Stretch goals were as follows:
 
 Frances Hitchcock
 16 February 2026
+
+# Amendments
+Refactored code to use document fragment to append html. This re-attaches the event listeners in case renderMain() should be called multiple times.

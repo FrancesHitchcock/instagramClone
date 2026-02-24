@@ -33,36 +33,41 @@ const posts = [
 
 const main = document.getElementById("main");
 
-function renderMain() {
-    let innerHtml = ``;
+function renderMain() {    
+    const fragment = new DocumentFragment;
 
     for (let i = 0; i < posts.length; i++) {
         const post = posts[i];
 
-        innerHtml += `
-            <section class="user-profile">
-                <div class="user-info">
-                    <img class="avatar" src="${post.avatar}" alt="${post.name} avatar">
-                    <div class="user-name-wrapper">
-                        <h2 class="name">${post.name}</h2>
-                        <p class="location">${post.location}</p>
-                    </div>
+        const section = document.createElement("section");
+        section.classList.add("user-profile");
+        fragment.appendChild(section);
+
+        section.innerHTML = `
+            <div class="user-info">
+                <img class="avatar" src="${post.avatar}" alt="${post.name} avatar">
+                <div class="user-name-wrapper">
+                    <h2 class="name">${post.name}</h2>
+                    <p class="location">${post.location}</p>
                 </div>
-                <img class="user-img" src="${post.post}" alt="${post.alt}">
-                <div class="profile-section">
-                    <div class="icon-container">
-                        <img data-postindex="${i}" class="icon" src="images/icon-heart.png" alt="likes icon.">
-                        <img class="icon" src="images/icon-comment.png" alt="comment icon.">
-                        <img class="icon" src="images/icon-dm.png" alt="direct message icon.">
-                    </div>
-                    <p class="like-count"><span class="bold-text" data-likesindex="${i}">${post.likes} likes</span></p>
-                    <p class="username-caption"><span class="bold-text">${post.username}</span> ${post.comment}</p>
+            </div>
+            <img class="user-img" src="${post.post}" alt="${post.alt}">
+            <div class="profile-section">
+                <div class="icon-container">
+                    <img data-postindex="${i}" class="icon" src="images/icon-heart.png" alt="likes icon.">
+                    <img class="icon" src="images/icon-comment.png" alt="comment icon.">
+                    <img class="icon" src="images/icon-dm.png" alt="direct message icon.">
                 </div>
-            </section>
+                <p class="like-count"><span class="bold-text" data-likesindex="${i}">${post.likes} likes</span></p>
+                <p class="username-caption"><span class="bold-text">${post.username}</span> ${post.comment}</p>
+            </div>
         `
+        
+        const likesElem = section.querySelector('[data-postindex]');
+        likesElem.addEventListener("dblclick", renderLikes);
     }
-    
-    main.innerHTML = innerHtml;
+
+    main.replaceChildren(fragment);
 }
 
 function renderLikes(e) {
@@ -75,10 +80,4 @@ function renderLikes(e) {
 }
 
 renderMain();
-
-const likesElems = document.querySelectorAll('[data-postindex]');
-
-likesElems.forEach(elem => {
-    elem.addEventListener("dblclick", renderLikes);
-})
 
